@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ASCII_MIRROR</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+  <link rel="stylesheet" href="cyber.css">
+</head>
+<body>
+  <div class="container">
+    <div class="title">ASCII_MIRROR</div>
+    <div class="btn-group">
+      <button class="mode-btn active" onclick="setMode('webcam')">WEBCAM</button>
+      <button class="mode-btn" onclick="setMode('image')">IMAGE</button>
+    </div>
+    <input type="file" id="imgInput" accept="image/*" style="display:none">
+    <pre id="out"></pre>
+    <div class="btn-group">
+      <button class="filter-btn" onclick="setFilter(1)">EDGE</button>
+      <button class="filter-btn" onclick="setFilter(2)">BLUR</button>
+      <button class="filter-btn" onclick="setFilter(3)">INVERT</button>
+      <button class="filter-btn" onclick="setFilter(4)">B&amp;W</button>
+      <button class="filter-btn" onclick="setFilter(5)">THERMAL</button>
+    </div>
+    <div class="ui">M: cycle | S: save | 1-5: filters | F: fullscreen</div>
+  </div>
+
+  <script>
+    let cam, img, out, mode = 'webcam';
+    const W = 120, H = 60, CHARS = " .:-=+*#%@";
+    let filter = 0, pixels = [], activeBtn = null;
+     function setup() {
+      noCanvas();
+      out = select('#out');
+      select('#imgInput').changed(loadImageFile);
+      frameRate(30);
+      startWebcam();
+    }
+
+    function startWebcam() {
+      cam = createCapture(VIDEO, () => {
+        cam.size(W, H);
+        cam.hide();
+        setMode('webcam');
+      });
+      cam.elt.onloadedmetadata = () => {
+        cam.size(W, H);
+        cam.hide();
+      };
+    }
+
+    function draw() {
+      if (mode === 'webcam' && cam && cam.loadedmetadata) {
+        cam.loadPixels();
+        pixels = cam.pixels;
+      } else if (mode === 'image' && img) {
+        img.loadPixels();
+        pixels = img.pixels;
+      }
+      if (pixels.length > 0) renderASCII();
+    }
+
+    function renderASCII() {
+      let h = '';
+      for (let y = 0; y < H; y++) {
+        for (let x = 0; x < W; x++) {
+          let i = (y * W + x) * 4;
+          let r = pixels[i] || 0,
+              g = pixels[i + 1] || 0,
+              b = pixels[i + 2] || 0;
+          let v = applyFilter(r, g, b);
+          let c = CHARS[Math.floor(v * 9)];
+          h += `<span style="color:rgb(${r},${g},${b})">${c}</span>`;
+        }
+        h += '\n';
+      }
+      out.html(h);
+    }
+
+    function applyFilter(r, g, b) {
+      let v = (r * 0.3 + g * 0.6 + b * 0.1) / 255;
+      switch (filter) {
+        case 1: return .8;
+        case 2: return .5;
+        case 3: return 1 - v;
+        case 4: return v > .5 ? 1 : 0;
+        case 5: return r / 255;
+        default: return v;
+      }
+    }
+
+    function setMode(m) {
+      mode = m;
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`[onclick="setMode('${m}')"]`).classList.add('active');
+      if (m === 'image') select('#imgInput').elt.click();
+    }
+
+    function loadImageFile() {
+      let f = this.elt.files[0];
+      let r = new FileReader();
+      r.onload = e => {
+        let i = new Image();
+        i.onload = () => {
+          img = createGraphics(W, H);
+          img.image(i, 0, 0, W, H);
+        };
+        i.src = e.target.result;
+      };
+      r.readAsDataURL(f);
+    }
+
+    function keyPressed() {
+      if (key >= '1' && key <= '5') setFilter(key - '0');
+      if (key === 's') saveArt();
+      if (key === 'm') setMode(mode === 'webcam' ? 'image' : 'webcam');
+      if (key === 'f') toggleFullscreen();
+    }function saveArt() {
+      let b = new Blob([out.elt.innerText], { type: 'text/plain' });
+      let a = document.createElement('a');
+      a.href = URL.createObjectURL(b);
+      a.download = 'ascii_art.txt';
+      a.click();
+    }
+    function toggleFullscreen() {
+      document.fullscreenElement
+        ? document.exitFullscreen()
+        : document.documentElement.requestFullscreen();
+    }
+     function setFilter(f) {
+      filter = f;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.filter-btn')[f - 1].classList.add('active');
+    }
+  </script>
+</body>
+</html>
