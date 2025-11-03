@@ -19,7 +19,6 @@ All visuals are rendered in real time using nothing but **characters** and **p5.
 - [Contributing](#contributing)
 - [License](#license)
 - [Why?](#why)
-- [Credits](#credits)
 
 ---
 
@@ -120,7 +119,15 @@ B&W
 
 
 
-<img width="1920" height="1140" alt="Screenshot 2025-11-03 170426" src="https://github.com/user-attachments/assets/29132c20-cda8-4d5f-ae97-db53979bf193" />                               
+
+                           
+
+<img width="1920" height="1140" alt="Screenshot 2025-11-03 170435" src="https://github.com/user-attachments/assets/47afd9d1-bc12-4a2d-813f-ce7994b65263" />
+
+
+
+
+
 
 
 
@@ -130,6 +137,11 @@ B&W
 
 License
 This project is licensed under the MIT License
+
+
+
+
+
 
 
 💡 Why This Project
