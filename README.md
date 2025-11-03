@@ -72,6 +72,19 @@ It’s a visual creation — real-time ASCII rendering from webcam/image
 
 
 
+<img width="1920" height="1140" alt="Screenshot 2025-11-01 090518" src="https://github.com/user-attachments/assets/00147b6b-8511-4baf-b269-0ff588d6aaed" />
+
+
+
+
+
+<img width="1920" height="1140" alt="Screenshot 2025-11-03 170426" src="https://github.com/user-attachments/assets/651652dc-603a-45ad-95b5-5776a94674a3" />
+
+
+
+
+
+
 
 
 
