@@ -46,7 +46,7 @@ Lightweight, fast, and cyberpunk-inspired — yet packed with features:
 ---
 
 ## 🧩 Getting Started
-You can run ASCII_MIRROR_PRO instantly — no build system, no dependencies.
+You can run ASCII_MIRROR instantly — no build system, no dependencies.
 
 ### Requirements
 - Any modern web browser (Chrome, Firefox, Edge, Safari)
