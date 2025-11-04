@@ -373,24 +373,10 @@ B&W
 
 
 
-License
-This project is licensed under the MIT License
 
 
 
 
-
-
-
-💡 Why This Project
-
-ASCII_MIRROR was built to prove that creativity doesn’t need external libraries or endless lines of code. Within the 150-line limit and using only built-in functions, it turns your webcam feed or uploaded image into dynamic ASCII art — converting pixels into pure text visuals.
-
-Visual Creation: Art and interactivity through characters and color.
-
-Compact Coder: Clean logic within tight constraints.
-
-No-Import Rookie: Pure code, pure creativity.
 
 “We didn’t just mirror your face — we mirrored how code can be art.”
 
