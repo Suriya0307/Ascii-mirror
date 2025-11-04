@@ -174,16 +174,14 @@ xdg-open index.html # Linux
 
 ## Processing Pipeline
 
-```mermaid
-graph TD
-    A[Webcam / Image Input] --> B[loadPixels() — Extract RGB]
-    B --> C[Luminance Calc — 0.3R + 0.6G + 0.1B]
-    C --> D[Apply Filter — Edge/Blur/etc.]
-    D --> E[Map to ASCII — 0-255 → 10 Chars]
-    E --> F[Preserve RGB Color — <span style="...">]
-    F --> G[Inject to <pre id="out"> — 30 FPS]
-    G --> H[Display in Browser]
-```
+
+
+![pipeline](https://github.com/user-attachments/assets/f18d3298-51bb-4c73-ba87-73f101945a07)
+
+
+
+
+
 
 1. **Capture** → `cam.loadPixels()` or `img.loadPixels()`  
 2. **Luminance** → Standard formula for brightness  
@@ -302,10 +300,7 @@ It's **148 lines of pure magic**.
 
 ---
 
-<div align="center">
-  <b>Ready to win?</b><br>
-  <code>git clone https://github.com/Suriya0307/Ascii-mirror</code> → <b>Open index.html</b> → <b>Press M</b> → <b>Press 1</b> → <b>Press S</b> → <b>Win</b>
-</div>
+
 
 
 
@@ -316,7 +311,9 @@ THIS IS THE SCREENSHOT OF THE CHALLENGE I GOT
 
 
 
+
 <img width="1920" height="1140" alt="Screenshot 2025-11-01 090518" src="https://github.com/user-attachments/assets/00147b6b-8511-4baf-b269-0ff588d6aaed" />
+
 
 
 
